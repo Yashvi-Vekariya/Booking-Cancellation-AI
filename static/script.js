@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
  
      // Initialize Seasonal Heatmap
      initHeatmap();
+     
  
      // Add event listeners
      form.addEventListener('submit', handleFormSubmit);
