@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static' , filename='style.css') }}">
+    <title>HOTEL RESERVATION PREDICTION</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-hotel"></i>
+                <span>Victorious Stay</span>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/Yashvi-Vekariya" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/yashvi-vekariya/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </nav>
+
+        <div class="hero">
+            <h1>Hotel Reservation Prediction</h1>
+            <p>Anticipate guest behaviors with our AI-powered prediction system</p>
+        </div>
+
+        <main class="container">
+            <section class="about-project">
+                <h2><i class="fas fa-info-circle"></i> About This Project</h2>
+                <div class="about-content">
+                    <p>This Hotel Reservation Prediction system uses machine learning to forecast booking cancellations based on various factors. By analyzing patterns in guest data, hotels can optimize room allocation and maximize revenue.</p>
+                    <p>The model considers factors such as lead time, pricing, meal preferences, and booking channels to determine the likelihood of cancellation.</p>
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <i class="fas fa-check-circle"></i>
+                            <h3>85%</h3>
+                            <p>Prediction Accuracy</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-coins"></i>
+                            <h3>12%</h3>
+                            <p>Revenue Increase</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-hotel"></i>
+                            <h3>5,000+</h3>
+                            <p>Bookings Analyzed</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="prediction-form">
+                <h2><i class="fas fa-concierge-bell"></i> Predict Reservation Status</h2>
+                <div class="timeline">
+                    <div class="step active">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Details</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Processing</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Results</div>
+                    </div>
+                </div>
+
+                <form method="POST" id="prediction-form">
+                    <div class="form-cards">
+                        <div class="form-card">
+                            <h3>Booking Information</h3>
+                            <div class="form-group">
+                                <label for="lead_time"><i class="fas fa-calendar-alt"></i> Lead Time (days)</label>
+                                <div class="input-container">
+                                    <input type="number" id="lead_time" name="lead_time" required min="0">
+                                    <div class="tooltip">Number of days between booking and arrival date</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="arrival_date"><i class="fas fa-calendar-day"></i> Arrival Date</label>
+                                <div class="date-selection">
+                                    <select id="arrival_month" name="arrival_month" required>
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                    <select id="arrival_date" name="arrival_date" required>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+                                <div class="seasonal-heatmap" id="seasonal-heatmap">
+                                    <div class="heatmap-title">Seasonal Demand</div>
+                                    <div class="heatmap-grid" id="heatmap-grid"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group duration-group">
+                                <div class="half-width">
+                                    <label for="no_of_week_nights"><i class="fas fa-moon"></i> Week Nights</label>
+                                    <input type="number" id="no_of_week_nights" name="no_of_week_nights" required min="0">
+                                </div>
+                                <div class="half-width">
+                                    <label for="no_of_weekend_nights"><i class="fas fa-umbrella-beach"></i> Weekend Nights</label>
+                                    <input type="number" id="no_of_weekend_nights" name="no_of_weekend_nights" required min="0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-card">
+                            <h3>Guest Preferences</h3>
+                            <div class="form-group">
+                                <label for="type_of_meal_plan"><i class="fas fa-utensils"></i> Meal Plan</label>
+                                <select id="type_of_meal_plan" name="type_of_meal_plan" required>
+                                    <option value="0">Meal Plan 1 (Breakfast)</option>
+                                    <option value="1">Meal Plan 2 (Half Board)</option>
+                                    <option value="2">Meal Plan 3 (Full Board)</option>
+                                    <option value="3">Not Selected</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="room_type_reserved"><i class="fas fa-bed"></i> Room Type</label>
+                                <select id="room_type_reserved" name="room_type_reserved" required>
+                                    <option value="0">Room Type 1 (Standard)</option>
+                                    <option value="1">Room Type 2 (Deluxe)</option>
+                                    <option value="2">Room Type 3 (Executive)</option>
+                                    <option value="3">Room Type 4 (Suite)</option>
+                                    <option value="4">Room Type 5 (Presidential Suite)</option>
+                                    <option value="5">Room Type 6 (Villa)</option>
+                                    <option value="6">Room Type 7 (Penthouse)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="no_of_special_request"><i class="fas fa-concierge-bell"></i> Special Requests</label>
+                                <input type="number" id="no_of_special_request" name="no_of_special_request" required min="0">
+                            </div>
+                        </div>
+
+                        <div class="form-card">
+                            <h3>Financial Details</h3>
+                            <div class="form-group">
+                                <label for="avg_price_per_room"><i class="fas fa-dollar-sign"></i> Avg. Price Per Room</label>
+                                <div class="price-input">
+                                    <span class="currency">$</span>
+                                    <input type="number" id="avg_price_per_room" name="avg_price_per_room" required min="0">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="market_segment_type"><i class="fas fa-globe"></i> Market Segment</label>
+                                <select id="market_segment_type" name="market_segment_type" required>
+                                    <option value="0">Aviation</option>
+                                    <option value="1">Complimentary</option>
+                                    <option value="2">Corporate</option>
+                                    <option value="3">Offline</option>
+                                    <option value="4">Online</option>
+                                </select>
+                            </div>
+
+                            <div class="revenue-impact">
+                                <h4>Potential Revenue Impact</h4>
+                                <div class="impact-meter">
+                                    <div class="meter-bar">
+                                        <div class="meter-fill" id="revenue-meter"></div>
+                                    </div>
+                                    <div class="meter-value">$<span id="revenue-value">0</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="predict-btn">
+                        <span class="btn-text">Predict Reservation Status</span>
+                        <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                    </button>
+                </form>
+            </section>
+
+            <section class="result-section" id="result-section">
+                <h2><i class="fas fa-chart-pie"></i> Prediction Result</h2>
+                <div class="result-container">
+                    <div class="prediction-dial">
+                        <div class="dial-container">
+                            <div class="dial-background"></div>
+                            <div class="dial-indicator" id="dial-indicator"></div>
+                            <div class="dial-center"></div>
+                            <div class="dial-value" id="dial-value">0%</div>
+                        </div>
+                        <div class="dial-label">Cancellation Probability</div>
+                    </div>
+
+                    <div class="prediction-message" id="prediction-message">
+                        <!-- This will be filled by JavaScript -->
+                    </div>
+
+                    <div class="recommendation-card" id="recommendation-card">
+                        <h3><i class="fas fa-lightbulb"></i> Recommendations</h3>
+                        <ul id="recommendations">
+                            <!-- This will be filled by JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-hotel"></i>
+                    <span>Victorious Stay Predictions</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/Yashvi-Vekariya" target="_blank">GitHub</a>
+                    <a href="https://www.linkedin.com/in/yashvi-vekariya/" target="_blank">LinkedIn</a>
+                </div>
+                <div class="copyright">
+                    &copy; 2025 Developed by Yashvi Vekariya
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="loader" id="loader">
+        <div class="suitcase">
+            <div class="suitcase-body"></div>
+            <div class="suitcase-handle"></div>
+        </div>
+        <p>Processing Your Prediction...</p>
+    </div>
+
+    <script src="{{ url_for('static' , filename='script.js') }}"></script>
+</body>
+</html>
